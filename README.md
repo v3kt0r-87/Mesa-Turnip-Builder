@@ -1,6 +1,6 @@
 # Freedreno Turnip Builder 
 
-## This project aims to build a turnip driver as a Module for ```MAGISK / KERNELSU```
+## This project aims to build a turnip driver as a Module for ``MAGISK/KERNELSU``
 
 ## How to Build Locally ?
 Simply clone this repo and use ``BASH`` to build 
