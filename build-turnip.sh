@@ -8,7 +8,7 @@ workdir="$(pwd)/turnip_workdir"
 magiskdir="$workdir/turnip_module"
 
 # Define Android NDK version
-ndkver="android-ndk-r26d"
+ndkver="android-ndk-r27-beta1"
 
 # Define colors for terminal output
 green='\033[0;32m'
