@@ -3,7 +3,7 @@
 ## Simple Bash script that aims to build a turnip driver as a Module for ``MAGISK/KERNELSU``
 
 ## How to Build Locally ?
-Simply clone this repo and use ``BASH`` to build 
+Simply clone this repo and use ``BASH`` to build , you will need a distro that is somewhat recent check ``NOTES`` section below 
 
 `` bash build-turnip.sh `` and wait until it gets finished 
 
