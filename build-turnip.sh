@@ -155,7 +155,7 @@ EOF
 cat <<EOF >"module.prop"
 id=turnip-mesa
 name=Freedreno Turnip Vulkan Driver
-version=v24.1
+version=v24.2
 versionCode=1
 author=V3KT0R-87
 description=Turnip is an open-source vulkan driver for devices with Adreno 6xx GPUs.
