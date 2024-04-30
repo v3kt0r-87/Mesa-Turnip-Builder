@@ -57,7 +57,7 @@ curl https://dl.google.com/android/repository/"$ndkver"-linux.zip --output "$ndk
 
 clear
 
-echo "Extracting Android NDK to a folder..." $'\n'
+echo "Extracting Android NDK..." $'\n'
 unzip "$ndkver"-linux.zip &> /dev/null
 
 # Download Mesa source code
@@ -66,7 +66,7 @@ curl https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.zip --out
 
 clear
 
-echo "Extracting Mesa source to a folder..." $'\n'
+echo "Extracting Mesa source..." $'\n'
 unzip mesa-main.zip &> /dev/null
 cd mesa-main
 
@@ -99,7 +99,7 @@ meson build-android-aarch64 --cross-file "$workdir"/mesa-main/android-aarch64 -D
 echo "Compiling build files..." $'\n'
 ninja -C build-android-aarch64 &> "$workdir"/ninja_log
 
-echo "Using patchelf to match soname..." $'\n'
+echo "Using patchelf to match .so name..." $'\n'
 cp "$workdir"/mesa-main/build-android-aarch64/src/freedreno/vulkan/libvulkan_freedreno.so "$workdir"
 cd "$workdir"
 
@@ -201,7 +201,7 @@ ui_print ""
 EOF
 
 
-echo "Packing files in to magisk module ..." $'\n'
+echo "Packing files in to Magisk/KSU module ..." $'\n'
 zip -r $workdir/turnip.zip * &> /dev/null
 if ! [ -a $workdir/turnip.zip ];
 	then echo -e "$red-Packing failed!$nocolor" && exit 1
