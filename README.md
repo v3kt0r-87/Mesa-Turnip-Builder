@@ -8,6 +8,7 @@ Simply clone this repo and use ``BASH`` to build , you will need a distro that i
 `` bash build-turnip.sh `` and wait until it gets finished 
 
 `` MAKE SURE YOU HAVE A STABLE INTERNET CONNECTION BEFORE PROCEEDING ``
+`` USE A VPN IF YOUR ISP THROTTLES YOUR SPEED ``
 
 ### NOTES :
 Make sure your Android version is ```13``` or above otherwise you wont be able to install 
