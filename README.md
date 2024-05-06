@@ -10,7 +10,7 @@ Simply clone this repo and use ``BASH`` to build , you will need a distro that i
 `` MAKE SURE YOU HAVE A STABLE INTERNET CONNECTION BEFORE PROCEEDING ``
 
 ### NOTES :
-Make sure your Android version is ```13``` or above 
+Make sure your Android version is ```13``` or above otherwise you wont be able to install 
 
 Make sure you have the latest ```MAGISK / KERNELSU``` before installing 
 
