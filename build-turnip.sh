@@ -39,14 +39,10 @@ done
 # Install missing dependencies automatically
 if [ "$deps_missing" == "1" ]; then
     echo "Missing dependencies, installing them now..." $'\n'
-    sudo apt install -y meson patchelf unzip curl python3-pip flex bison zip &> /dev/null
+    sudo apt install -y meson patchelf unzip curl python3-pip flex bison zip python3-mako python-is-python3 &> /dev/null
 fi
 
 clear
-
-# Install python Mako dependency
-echo "Installing python Mako dependency (if missing)..." $'\n'
-python3 -m pip install mako &> /dev/null
 
 echo "Creating and entering the work directory..." $'\n'
 mkdir -p "$workdir" && cd "$_"
