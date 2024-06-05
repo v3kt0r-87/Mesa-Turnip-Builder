@@ -29,7 +29,7 @@ Please use either Ubuntu / Debian based distro to build ``` UBUNTU 22.04 / DEBIA
  
  A huge thanks to [@Mesa3D Team](//gitlab.freedesktop.org/mesa/mesa) for giving us such amazing drivers so that we can further improve our device performance 
 
- thanks to all memebers of our Telegram Group [Adreno Driver Support Group](//t.me/adreno_driver) for testing and sharing benchmarks
+ Thanks to all memebers of our Telegram Group [Adreno Driver Support Group](//t.me/adreno_driver) for testing and sharing benchmarks
 
  
 
