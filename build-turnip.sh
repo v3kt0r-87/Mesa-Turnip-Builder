@@ -1,19 +1,18 @@
 #!/bin/bash -e
 
-# Define required packages for building the turnip driver
+# Required packages for building the turnip driver
 deps="meson ninja patchelf unzip curl pip flex bison zip"
 
-# Define directory variables
-workdir="$(pwd)/turnip_workdir"
-magiskdir="$workdir/turnip_module"
-
-# Define Android NDK version
+# Android NDK version
 ndkver="android-ndk-r26d"
 
-# Define colors for terminal output
+# Colors for terminal output
 green='\033[0;32m'
 red='\033[0;31m'
 nocolor='\033[0m'
+
+workdir="$(pwd)/turnip_workdir"
+magiskdir="$workdir/turnip_module"
 
 clear
 
@@ -25,7 +24,7 @@ fi
 
 echo "Checking system for required dependencies..."
 
-# Check for required dependencies and install missing ones if any
+# Check for required dependencies 
 for deps_chk in $deps; do
     sleep 0.25
     if command -v "$deps_chk" >/dev/null 2>&1; then
@@ -145,8 +144,6 @@ EOF
 cat <<EOF >"$meta/updater-script"
 #MAGISK
 EOF
-
-# This will check for any issues and also provide correct PATH for module to install in KernelSu 
 
 cat <<EOF >"module.prop"
 id=turnip-mesa
