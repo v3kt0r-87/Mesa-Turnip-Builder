@@ -73,8 +73,8 @@ ndk="$workdir/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
 cat <<EOF >"android-aarch64"
 [binaries]
 ar = '$ndk/llvm-ar'
-c = ['ccache', '$ndk/aarch64-linux-android33-clang', '-O3']
-cpp = ['ccache', '$ndk/aarch64-linux-android33-clang++', '-fno-exceptions', '-fno-unwind-tables', '-fno-asynchronous-unwind-tables', '-static-libstdc++', '-O3']
+c = ['ccache', '$ndk/aarch64-linux-android33-clang', '-O2']
+cpp = ['ccache', '$ndk/aarch64-linux-android33-clang++', '-fno-exceptions', '-fno-unwind-tables', '-fno-asynchronous-unwind-tables', '-static-libstdc++', '-O2']
 c_ld = 'lld'
 cpp_ld = 'lld'
 strip = '$ndk/aarch64-linux-android-strip'
@@ -88,7 +88,7 @@ EOF
 
 # Generate build files using Meson
 echo "Generating build files..." $'\n'
-meson build-android-aarch64 --cross-file "$workdir"/mesa-main/android-aarch64 -Dbuildtype=release -Doptimization=3 -Dplatforms=android -Dplatform-sdk-version=33 -Dandroid-stub=true -Dgallium-drivers= -Dvulkan-drivers=freedreno -Dfreedreno-kmds=kgsl -Db_lto=true &> "$workdir"/meson_log
+meson build-android-aarch64 --cross-file "$workdir"/mesa-main/android-aarch64 -Dbuildtype=release -Doptimization=2 -Dplatforms=android -Dplatform-sdk-version=33 -Dandroid-stub=true -Dgallium-drivers= -Dvulkan-drivers=freedreno -Dfreedreno-kmds=kgsl -Db_lto=true &> "$workdir"/meson_log
 
 # Compile build files using Ninja
 echo "Compiling build files..." $'\n'
@@ -151,7 +151,7 @@ name=Freedreno Turnip Vulkan Driver
 version=v24.3
 versionCode=1
 author=V3KT0R-87
-description=Turnip is an open-source vulkan driver for devices with Adreno 6xx GPUs.
+description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-7xx GPUs.
 EOF
 
 cat <<EOF >"customize.sh"
