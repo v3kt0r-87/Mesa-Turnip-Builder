@@ -21,6 +21,19 @@ Please use either Ubuntu / Debian based distro to build ``` UBUNTU 22.04 / DEBIA
 ### JOIN OUR OFFICIAL TELEGRAM GROUP 
 ```TELEGRAM```: [Join Group](//t.me/adreno_driver)
 
+# App Compatibility
+
+| Name                                            | Status | Notes                                                                                                                     |
+|-------------------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
+| 3D Mark                                         | ✅     |                                                                                                                           |
+| GRID™ Autosport                                 | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
+| SpongeBob SquarePants Battle For Bikini Bottom  | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,Poor Performance.                                                |
+| Carx Street                                     | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,Poor Performance.                                                |
+| MMJR2 Dolphin Emulator                          | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
+| PPSSPP                                          | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
+| EggNS                                           | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
+| ANGLE (com.android.angle)                       | ✅     |                                                                                                                           |
+
 # CREDITS 
 
 ### This project wont be possible without the help of these amazing people below :
@@ -31,7 +44,3 @@ Please use either Ubuntu / Debian based distro to build ``` UBUNTU 22.04 / DEBIA
 
  Thanks to all memebers of our Telegram Group [Adreno Driver Support Group](//t.me/adreno_driver) for testing and sharing benchmarks
 
- 
-
-
- 
