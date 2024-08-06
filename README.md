@@ -21,6 +21,8 @@ Please use either Ubuntu / Debian based distro to build ``` UBUNTU 22.04 / DEBIA
 ### JOIN OUR OFFICIAL TELEGRAM GROUP 
 ```TELEGRAM```: [Join Group](//t.me/adreno_driver)
 
+..
+
 # App Compatibility
 
 | Name                                            | Status | Notes                                                                                                                     |
@@ -33,6 +35,9 @@ Please use either Ubuntu / Debian based distro to build ``` UBUNTU 22.04 / DEBIA
 | PPSSPP                                          | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
 | EggNS                                           | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
 | ANGLE (com.android.angle)                       | ✅     |                                                                                                                           |
+| GTA Triology-Definitive Edition                 | ✅     | Tested by[Ryder_7777](//t.me/Ryder_7777)<br>Working,Poor Performance.                                                     |
+
+..
 
 # CREDITS 
 
