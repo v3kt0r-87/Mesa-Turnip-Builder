@@ -36,7 +36,7 @@ Please use either Ubuntu / Debian based distro to build ``` UBUNTU 22.04 / DEBIA
 | EggNS                                           | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
 | ANGLE (com.android.angle)                       | ✅     |                                                                                                                           |
 | GTA Triology-Definitive Edition                 | ✅     | Tested by [@Ryder_7777](//t.me/Ryder_7777)<br>Working,Poor Performance.                                                   |
-| Call of Duty WarZone Mobile                     | ✅     | Tested by [@SeniorFurry](//t.me/SeniorFurry)<br>Not Working,Texture Bugs.                                                 |
+| Call of Duty WarZone Mobile                     | ✅     | Tested by [@SeniorFurry](//t.me/SeniorFurry)<br>Working,Texture Bugs,Poor Performance.                                    |
 
 
 
