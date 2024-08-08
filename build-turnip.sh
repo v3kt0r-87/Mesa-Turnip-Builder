@@ -41,7 +41,7 @@ done
 # Install missing dependencies automatically
 if [ "$deps_missing" == "1" ]; then
     echo "Missing dependencies, installing them now..." $'\n'
-    sudo apt install -y meson ninja patchelf unzip curl python3-pip flex bison zip python3-mako python-is-python3 &> /dev/null
+    sudo apt install -y meson patchelf unzip curl python3-pip flex bison zip python3-mako python-is-python3 &> /dev/null
 fi
 
 clear
