@@ -5,8 +5,8 @@ deps="meson ninja patchelf unzip curl pip flex bison zip"
 
 # Android NDK and Mesa version
 ndkver="android-ndk-r27"
-mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-24.2.0-rc4/mesa-mesa-24.2.0-rc4.zip"
-mesadir="mesa-mesa-24.2.0-rc4"
+mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/24.2/mesa-24.2.zip"
+mesadir="mesa-24.2"
 
 # Colors for terminal output
 green='\033[0;32m'
