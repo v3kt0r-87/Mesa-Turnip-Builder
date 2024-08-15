@@ -14,8 +14,9 @@ Simply clone this repo and use **BASH** to build
 
 Check [Notes](//github.com/v3kt0r-87/Mesa-Turnip-Builder?tab=readme-ov-file#notes-) Section below for more info 
 
-**MAKE SURE YOU HAVE A STABLE INTERNET CONNECTION BEFORE PROCEEDING , USE A VPN IF YOUR ISP 
-  THROTTLES YOUR SPEED**
+**MAKE SURE YOU HAVE A STABLE INTERNET CONNECTION BEFORE PROCEEDING**
+
+**USE A VPN IF YOUR ISP THROTTLES YOUR SPEED**
 
 # App Compatibility
 
