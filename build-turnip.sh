@@ -197,9 +197,50 @@ ui_print ""
 EOF
 
 echo "Packing files into Magisk/KSU module ..." $'\n'
-zip -r $workdir/turnip.zip * &> /dev/null
-if ! [ -a $workdir/turnip.zip ]; then
+zip -r $workdir/Turnip-24.2-MAGISK-KSU.zip * &> /dev/null
+if ! [ -a $workdir/Turnip-24.2-MAGISK-KSU.zip ]; then
     echo -e "$red-Packing failed!$nocolor" && exit 1
 else
-    echo -e "$green-All done, you can take your module from here;$nocolor" && echo $workdir/turnip.zip
+    echo -e "$green-All done, you can take your module from here;$nocolor" && echo $workdir/Turnip-24.2-MAGISK-KSU.zip
 fi
+
+sleep 2
+
+
+clear
+
+echo " Its time to create Turnip build for EMULATOR"
+
+cd ..
+
+mv vulkan.adreno.so vulkan.turnip.so
+
+DRIVER_FILE="vulkan.turnip.so"
+META_FILE="meta.json"
+ZIP_FILE="Turnip-24.2-EMULATOR.zip"
+
+# Create meta.json file for the emulator
+cat <<EOF > "$META_FILE"
+{
+  "schemaVersion": 1,
+  "name": "Freedreno Turnip Driver v24.2",
+  "description": "Compiled from Mesa 24.2 + Android NDK 27.",
+  "author": "v3kt0r-87",
+  "packageVersion": "3",
+  "vendor": "Mesa3D",
+  "driverVersion": "Vulkan 1.3.289",
+  "minApi": 33,
+  "libraryName": "vulkan.turnip.so"
+}
+EOF
+
+# Zip the .so file and meta.json file
+if ! zip "$ZIP_FILE" "$DRIVER_FILE" "$META_FILE" > /dev/null 2>&1; then
+    echo -e "$red Error: Zipping the files failed. $nocolor"
+    exit 1
+fi
+
+echo -e "$green Build Finished :). $nocolor"
+
+# Cleanup 
+rm "$DRIVER_FILE" "$META_FILE"
