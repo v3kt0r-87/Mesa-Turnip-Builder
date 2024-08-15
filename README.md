@@ -23,9 +23,9 @@ Check [Notes](//github.com/v3kt0r-87/Mesa-Turnip-Builder?tab=readme-ov-file#note
 | Name                                            | Status | Notes                                                                                                                     |
 |-------------------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
 | 3D Mark                                         | ✅     |                                                                                                                           |
-| GRID™ Autosport                                 | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
-| SpongeBob SquarePants Battle For Bikini Bottom  | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,Poor Performance.                                                |
-| Carx Street                                     | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,Poor Performance.                                                |
+| GRID™ Autosport                                 | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.(60fps)                                                          |
+| SpongeBob SquarePants Battle For Bikini Bottom  | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,Poor Performance.(20-30fps)                                      |
+| Carx Street                                     | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working,Poor Performance.(25-30fps)                                      |
 | Dolphin Emulator                                | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
 | PPSSPP                                          | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
 | EggNS                                           | ✅     | Tested by [V3KT0R-87](//github.com/V3KT0R-87)<br>Working.                                                                 |
