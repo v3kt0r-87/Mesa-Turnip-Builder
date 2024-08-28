@@ -5,8 +5,8 @@ deps="meson ninja patchelf unzip curl pip flex bison zip"
 
 # Android NDK and Mesa version
 ndkver="android-ndk-r27"
-mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/24.2/mesa-24.2.zip"
-mesadir="mesa-24.2"
+mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.zip"
+mesadir="mesa-main"
 
 # Colors for terminal output
 green='\033[0;32m'
@@ -119,26 +119,37 @@ mkdir -p "$meta"
 
 # Create update-binary
 cat <<EOF >"$meta/update-binary"
+#!/sbin/sh
+
 #################
 # Initialization
 #################
+
 umask 022
+
 # echo before loading util_functions
-ui_print() { echo "\$1"; }
+ui_print() { echo "$1"; }
+
 require_new_magisk() {
   ui_print "*******************************"
-  ui_print " Please install Magisk v20.4+! "
+  ui_print " Please install Magisk v25.2+! "
   ui_print "*******************************"
   exit 1
 }
+
 #########################
 # Load util_functions.sh
 #########################
-OUTFD=\$2
-ZIPFILE=\$3
+
+OUTFD=$2
+ZIPFILE=$3
+
+mount /data 2>/dev/null
+
 [ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
 . /data/adb/magisk/util_functions.sh
-[ \$MAGISK_VER_CODE -lt 20400 ] && require_new_magisk
+[ $MAGISK_VER_CODE -lt 25200 ] && require_new_magisk
+
 install_module
 exit 0
 EOF
@@ -151,7 +162,7 @@ EOF
 cat <<EOF >"module.prop"
 id=turnip-mesa
 name=Freedreno Turnip Vulkan Driver
-version=v24.2
+version=v24.3
 versionCode=1
 author=V3KT0R-87
 description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-7xx GPUs.
@@ -186,6 +197,18 @@ set_perm_recursive \$MODPATH/system 0 0 755 u:object_r:system_file:s0
 set_perm_recursive \$MODPATH/system/vendor 0 2000 755 u:object_r:vendor_file:s0
 set_perm \$MODPATH/system/vendor/lib64/hw/vulkan.adreno.so 0 0 0644 u:object_r:same_process_hal_file:s0
 
+ui_print ""
+ui_print " Cleaning GPU Cache ... Please wait!"
+find /data/user_de/*/*/*cache/* -iname "*shader*" -exec rm -rf {} +
+find /data/data/* -iname "*shader*" -exec rm -rf {} +
+find /data/data/* -iname "*graphitecache*" -exec rm -rf {} +
+find /data/data/* -iname "*gpucache*" -exec rm -rf {} +
+find /data_mirror/data*/*/*/*/* -iname "*shader*" -exec rm -rf {} +
+find /data_mirror/data*/*/*/*/* -iname "*graphitecache*" -exec rm -rf {} +
+find /data_mirror/data*/*/*/*/* -iname "*gpucache*" -exec rm -rf {} +
+ui_print "- Done."
+ui_print ""
+
 ui_print "Driver installed Successfully"
 sleep 1.25
 
@@ -197,11 +220,11 @@ ui_print ""
 EOF
 
 echo "Packing files into Magisk/KSU module ..." $'\n'
-zip -r $workdir/Turnip-24.2-MAGISK-KSU.zip * &> /dev/null
-if ! [ -a $workdir/Turnip-24.2-MAGISK-KSU.zip ]; then
+zip -r $workdir/Turnip-24.3-MAGISK-KSU.zip * &> /dev/null
+if ! [ -a $workdir/Turnip-24.3-MAGISK-KSU.zip ]; then
     echo -e "$red-Packing failed!$nocolor" && exit 1
 else
-    echo -e "$green-All done, you can take your module from here;$nocolor" && echo $workdir/Turnip-24.2-MAGISK-KSU.zip
+    echo -e "$green-All done, you can take your module from here;$nocolor" && echo $workdir/Turnip-24.3-MAGISK-KSU.zip
 fi
 
 sleep 2
@@ -217,18 +240,18 @@ mv vulkan.adreno.so vulkan.turnip.so
 
 DRIVER_FILE="vulkan.turnip.so"
 META_FILE="meta.json"
-ZIP_FILE="Turnip-24.2-EMULATOR.zip"
+ZIP_FILE="Turnip-24.3-EMULATOR.zip"
 
 # Create meta.json file for the emulator
 cat <<EOF > "$META_FILE"
 {
   "schemaVersion": 1,
-  "name": "Freedreno Turnip Driver v24.2",
-  "description": "Compiled from Mesa 24.2 + Android NDK 27.",
+  "name": "Freedreno Turnip Driver v24.3",
+  "description": "Compiled from Mesa 24.3 + NDK 27.",
   "author": "v3kt0r-87",
   "packageVersion": "3",
   "vendor": "Mesa3D",
-  "driverVersion": "Vulkan 1.3.289",
+  "driverVersion": "Vulkan 1.3.292",
   "minApi": 33,
   "libraryName": "vulkan.turnip.so"
 }
