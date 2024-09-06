@@ -4,9 +4,9 @@
 deps="meson ninja patchelf unzip curl pip flex bison zip"
 
 # Android NDK and Mesa version
-ndkver="android-ndk-r27"
-mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-24.2.1/mesa-mesa-24.2.1.zip"
-mesadir="mesa-mesa-24.2.1"
+ndkver="android-ndk-r27b"
+mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-24.2.2/mesa-mesa-24.2.2.zip"
+mesadir="mesa-mesa-24.2.2"
 
 # Colors for terminal output
 green='\033[0;32m'
@@ -151,7 +151,7 @@ EOF
 cat <<EOF >"module.prop"
 id=turnip-mesa
 name=Freedreno Turnip Vulkan Driver
-version=v24.2.1
+version=v24.2.2
 versionCode=1
 author=V3KT0R-87
 description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-7xx GPUs.
@@ -209,11 +209,11 @@ ui_print ""
 EOF
 
 echo "Packing files into Magisk/KSU module ..." $'\n'
-zip -r $workdir/Turnip-24.2.1-MAGISK-KSU.zip * &> /dev/null
-if ! [ -a $workdir/Turnip-24.2.1-MAGISK-KSU.zip ]; then
+zip -r $workdir/Turnip-24.2.2-MAGISK-KSU.zip * &> /dev/null
+if ! [ -a $workdir/Turnip-24.2.2-MAGISK-KSU.zip ]; then
     echo -e "$red-Packing failed!$nocolor" && exit 1
 else
-    echo -e "$green-All done, you can take your module from here;$nocolor" && echo $workdir/Turnip-24.2.1-MAGISK-KSU.zip
+    echo -e "$green-All done, you can take your module from here;$nocolor" && echo $workdir/Turnip-24.2.2-MAGISK-KSU.zip
 fi
 
 sleep 2
@@ -229,14 +229,14 @@ mv vulkan.adreno.so vulkan.turnip.so
 
 DRIVER_FILE="vulkan.turnip.so"
 META_FILE="meta.json"
-ZIP_FILE="Turnip-24.2.1-EMULATOR.zip"
+ZIP_FILE="Turnip-24.2.2-EMULATOR.zip"
 
 # Create meta.json file for the emulator
 cat <<EOF > "$META_FILE"
 {
   "schemaVersion": 1,
-  "name": "Freedreno Turnip Driver v24.2.1",
-  "description": "Compiled from Mesa 24.2.1 + Android NDK 27.",
+  "name": "Freedreno Turnip Driver v24.2.2",
+  "description": "Compiled from Mesa 24.2.2 + Android NDK 27.",
   "author": "v3kt0r-87",
   "packageVersion": "3",
   "vendor": "Mesa3D",
