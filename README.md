@@ -40,9 +40,11 @@ Check [Notes](//github.com/v3kt0r-87/Mesa-Turnip-Builder?tab=readme-ov-file#note
 
 Make sure your Android version is ```13``` or above otherwise you wont be able to install 
 
-Please use either Ubuntu / Debian based distro to build (Ubuntu 23.10 / Debain 12 or later)
-
 Make sure you have the latest **MAGISK / KERNELSU** before installing
+
+## Please use either Ubuntu / Debian based distro to build 
+```(Ubuntu 22.04.4 LTS / Debain 12.7 or later)```
+
 
 
 # CREDITS 🙏
