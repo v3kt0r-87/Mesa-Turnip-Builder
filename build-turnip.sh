@@ -4,7 +4,9 @@
 deps="meson ninja patchelf unzip curl pip flex bison zip"
 
 # Android NDK and Mesa version
-ndkver="android-ndk-r27b"
+ndkver="https://dl.google.com/android/repository/android-ndk-r27b-linux.zip"
+ndkdir="android-ndk-r27b"
+
 mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-24.2.2/mesa-mesa-24.2.2.zip"
 mesadir="mesa-mesa-24.2.2"
 
@@ -15,6 +17,10 @@ nocolor='\033[0m'
 
 workdir="$(pwd)/turnip_workdir"
 magiskdir="$workdir/turnip_module"
+
+DRIVER_FILE="vulkan.turnip.so"
+META_FILE="meta.json"
+ZIP_FILE="Turnip-24.2.2-EMULATOR.zip"
 
 clear
 
@@ -51,12 +57,12 @@ mkdir -p "$workdir" && cd "$_"
 
 # Download Android NDK
 echo "Downloading Android NDK..." $'\n'
-curl https://dl.google.com/android/repository/"$ndkver"-linux.zip --output "$ndkver"-linux.zip &> /dev/null
+curl $ndkver --output "$ndkdir".zip &> /dev/null
 
 clear
 
 echo "Extracting Android NDK..." $'\n'
-unzip "$ndkver"-linux.zip &> /dev/null
+unzip "$ndkdir".zip &> /dev/null
 
 # Download Mesa source
 echo "Downloading Latest Mesa source ..." $'\n'
@@ -72,7 +78,7 @@ clear
 
 # Create Meson cross file for Android
 echo "Creating Meson cross file..." $'\n'
-ndk_bin="$workdir/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
+ndk_bin="$workdir/$ndkdir/toolchains/llvm/prebuilt/linux-x86_64/bin"
 cat <<EOF >"android-aarch64"
 [binaries]
 ar = '$ndk_bin/llvm-ar'
@@ -208,35 +214,27 @@ ui_print "BY: @VEKT0R_87"
 ui_print ""
 EOF
 
-echo "Packing files into Magisk/KSU module ..." $'\n'
+echo "Packing driver files into Magisk/KSU module ..." $'\n'
 zip -r $workdir/Turnip-24.2.2-MAGISK-KSU.zip * &> /dev/null
 if ! [ -a $workdir/Turnip-24.2.2-MAGISK-KSU.zip ]; then
     echo -e "$red-Packing failed!$nocolor" && exit 1
 else
-    echo -e "$green-All done, you can take your module from here;$nocolor" && echo $workdir/Turnip-24.2.2-MAGISK-KSU.zip
-fi
+    clear
 
-sleep 2
+    echo " Its time to create Turnip build for EMULATOR"
 
+    sleep 2
 
-clear
+    cd ..
 
-echo " Its time to create Turnip build for EMULATOR"
+    mv vulkan.adreno.so vulkan.turnip.so
 
-cd ..
-
-mv vulkan.adreno.so vulkan.turnip.so
-
-DRIVER_FILE="vulkan.turnip.so"
-META_FILE="meta.json"
-ZIP_FILE="Turnip-24.2.2-EMULATOR.zip"
-
-# Create meta.json file for the emulator
-cat <<EOF > "$META_FILE"
+# Create meta.json file for turnip emulator
+ cat <<EOF > "$META_FILE"
 {
   "schemaVersion": 1,
   "name": "Freedreno Turnip Driver v24.2.2",
-  "description": "Compiled from Mesa 24.2.2 + Android NDK 27.",
+  "description": "Compiled using Android NDK 27B + Mesa 24.2.2.",
   "author": "v3kt0r-87",
   "packageVersion": "3",
   "vendor": "Mesa3D",
@@ -246,13 +244,19 @@ cat <<EOF > "$META_FILE"
 }
 EOF
 
-# Zip the .so file and meta.json file
-if ! zip "$ZIP_FILE" "$DRIVER_FILE" "$META_FILE" > /dev/null 2>&1; then
-    echo -e "$red Error: Zipping the files failed. $nocolor"
+# Zip the turnip .so file and meta.json file
+    if ! zip "$ZIP_FILE" "$DRIVER_FILE" "$META_FILE" > /dev/null 2>&1; then
+    echo -e "$red Error: Zipping driver files failed. $nocolor"
     exit 1
-fi
+    fi
 
-echo -e "$green Build Finished :). $nocolor"
+    clear
+
+    echo -e "$green-All done, you can take your drivers from here;$nocolor" $'\n'
+    echo $workdir/Turnip-24.2.2-MAGISK-KSU.zip $'\n'
+    echo $workdir/Turnip-24.2.2-EMULATOR.zip $'\n'
+    echo -e "$green Build Finished :). $nocolor" $'\n'
 
 # Cleanup 
-rm "$DRIVER_FILE" "$META_FILE"
+    rm "$DRIVER_FILE" "$META_FILE"
+fi
