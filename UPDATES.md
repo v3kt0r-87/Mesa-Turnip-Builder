@@ -1,6 +1,15 @@
 # Update Changelog
 
-**🇮🇳 August 15, 2024**: Merged turnip build script (for emulators) with main build script.
+**September 9, 2024** Minor cleanup of turnip build script:
+
+1. Please use either Ubuntu 22.04.4 or Debain 12.7 based distros to build driver
+
+2. Android NDK was also updated from 27 to 27b (based on Clang 18)
+
+3. Build script will now only use stable version of Mesa to build turnip driver (Currently using Mesa 24.2.2)
+
+
+**🇮🇳 August 15, 2024**: Merged turnip build script (for emulators) with main build script:
 
 1. This will make the build process much easier.
 
