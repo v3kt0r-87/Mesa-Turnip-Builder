@@ -1,6 +1,6 @@
 # Freedreno Turnip Builder 🚀
 
-Simple Bash script that aims to build a turnip driver as a Module for **MAGISK/KERNELSU**
+Simple Bash script that aims to build a turnip driver for **MAGISK/KERNELSU or EMULATOR**
 
 # What's New : 🔥
 
