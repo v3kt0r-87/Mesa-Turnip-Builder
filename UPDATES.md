@@ -1,5 +1,10 @@
 # Update Changelog
 
+**September 19, 2024** Updated Mesa version to 24.2.3
+
+1. Sorry for not uploading drivers on time , i had a leg injury 
+
+
 **September 9, 2024** Minor cleanup of turnip build script:
 
 1. Please use either Ubuntu 22.04.4 or Debain 12.7 based distros to build driver
