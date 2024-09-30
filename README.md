@@ -14,10 +14,6 @@ Simply clone this repo and use **BASH** to build
 
 Check [Notes](//github.com/v3kt0r-87/Mesa-Turnip-Builder?tab=readme-ov-file#notes-) Section below for more info 
 
-**MAKE SURE YOU HAVE A STABLE INTERNET CONNECTION BEFORE PROCEEDING**
-
-**USE A VPN IF YOUR ISP THROTTLES YOUR SPEED**
-
 # App Compatibility
 
 | Name                                            | Status | Notes                                                                                                                     |
@@ -42,8 +38,12 @@ Make sure your Android version is ```13``` or above otherwise you wont be able t
 
 Make sure you have the latest **MAGISK / KERNELSU** before installing
 
+**MAKE SURE YOU HAVE A STABLE INTERNET CONNECTION BEFORE PROCEEDING**
+
+**USE A VPN IF YOUR ISP THROTTLES YOUR SPEED**
+
 ## Please use either Ubuntu / Debian based distro to build 
-```(Ubuntu 22.04.4 LTS / Debain 12.7 or later)```
+```(Ubuntu 22.04.4 LTS or later```
 
 
 
