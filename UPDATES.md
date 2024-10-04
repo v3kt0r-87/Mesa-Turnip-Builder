@@ -1,5 +1,9 @@
 # Update Changelog
 
+**October 4, 2024** : Updated Mesa version to 24.2.4
+
+1: All previous Mesa Dev build drivers were removed , only Stable builds will be uploaded from now on  
+
 **September 19, 2024** : Updated Mesa version to 24.2.3
 
 1. Sorry for not uploading drivers on time , i had a leg injury 
