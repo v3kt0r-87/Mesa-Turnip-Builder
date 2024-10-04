@@ -1,6 +1,6 @@
 # © 2024 Shankar Vallabhan A
 
-## This software, data, and their associated documentation files are subject to the terms and conditions of this LICENSE. Use of this file is permitted only in compliance with the License.
+## This software, data, and their associated documentation files are subject to the terms and conditions of this LICENSE. Use is permitted only in compliance with the License.
 
 ## Permission is hereby granted, free of charge, to any person or entity obtaining a copy of this Software to use, copy, modify, and distribute the Software under the following conditions:
 
