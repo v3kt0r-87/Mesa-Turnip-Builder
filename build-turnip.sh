@@ -235,7 +235,7 @@ else
   "schemaVersion": 1,
   "name": "Freedreno Turnip Driver mesa_git",
   "description": "Compiled using Android NDK 28 Beta",
-  "author": "v3kt0r-87",
+  "author": "v3kt0r-87,@Str4nger01",
   "packageVersion": "3",
   "vendor": "Mesa3D",
   "driverVersion": "Vulkan 1.3.296",
