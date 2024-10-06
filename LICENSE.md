@@ -1,4 +1,5 @@
 # © 2024 Shankar Vallabhan A
+# © 2024 Akhino S Kumar
 
 ## This software, data, and their associated documentation files are subject to the terms and conditions of this LICENSE. Use is permitted only in compliance with the License.
 
@@ -11,5 +12,3 @@
 # Disclaimer:
 
 ## THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-### For any inquiries regarding this license, the project, or permitted uses of the Software, please contact the [AUTHOR](//t.me/VEKTOR_87).
