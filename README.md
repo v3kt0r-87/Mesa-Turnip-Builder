@@ -1,6 +1,6 @@
 # Freedreno Turnip Builder 🚀
 
-## BLEEDING EDGE MESA + BETA ANDROID ADK , might cause bugs / issues
+## BLEEDING EDGE MESA + BETA ANDROID ADK ⚠️ <br> may cause bugs / issues
 
 Simple Bash script that aims to build a turnip driver for **MAGISK/KERNELSU or EMULATOR**
 
