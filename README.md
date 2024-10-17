@@ -28,6 +28,7 @@ Check [Notes](//github.com/v3kt0r-87/Mesa-Turnip-Builder?tab=readme-ov-file#note
 | ANGLE (com.android.angle)                       | ✅     |                                                                                                                           |
 | GTA Triology-Definitive Edition                 | ✅     | Tested by [@Ryder_7777](//t.me/Ryder_7777)<br>Working,Poor Performance.                                                   |
 | Call of Duty WarZone Mobile                     | ✅     | Tested by [@SeniorFurry](//t.me/SeniorFurry)<br>Working,Texture Bugs,Poor Performance.                                    |
+| Hitman Blood Money : Reprisal                   | ✅     | Tested by [@V3KT0R-87](//github.com/V3KT0R-87)<br>Working, 60 fps Medium Graphics.                                        |
 
 
 ### NOTES :
