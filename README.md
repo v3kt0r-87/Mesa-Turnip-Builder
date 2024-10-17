@@ -1,5 +1,7 @@
 # Freedreno Turnip Builder 🚀
 
+## Stable Mesa + Android NDK <br> Use this build for stability
+
 Simple Bash script that aims to build a turnip driver for **MAGISK/KERNELSU or EMULATOR**
 
 # What's New : 🔥
