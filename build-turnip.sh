@@ -4,11 +4,11 @@
 deps="meson ninja patchelf unzip curl pip flex bison zip"
 
 # Android NDK and Mesa version
-ndkver="https://dl.google.com/android/repository/android-ndk-r27b-linux.zip"
-ndkdir="android-ndk-r27b"
+ndkver="https://dl.google.com/android/repository/android-ndk-r27c-linux.zip"
+ndkdir="android-ndk-r27c"
 
-mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-24.2.4/mesa-mesa-24.2.4.zip"
-mesadir="mesa-mesa-24.2.4"
+mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-24.2.5/mesa-mesa-24.2.5.zip"
+mesadir="mesa-mesa-24.2.5"
 
 # Colors for terminal output
 green='\033[0;32m'
@@ -20,7 +20,7 @@ magiskdir="$workdir/turnip_module"
 
 DRIVER_FILE="vulkan.turnip.so"
 META_FILE="meta.json"
-ZIP_FILE="Turnip-24.2.4-EMULATOR.zip"
+ZIP_FILE="Turnip-24.2.5-EMULATOR.zip"
 
 clear
 
@@ -157,7 +157,7 @@ EOF
 cat <<EOF >"module.prop"
 id=turnip-mesa
 name=Freedreno Turnip Vulkan Driver
-version=v24.2.4
+version=v24.2.5
 versionCode=1
 author=V3KT0R-87
 description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-7xx GPUs.
@@ -215,8 +215,8 @@ ui_print ""
 EOF
 
 echo "Packing driver files into Magisk/KSU module ..." $'\n'
-zip -r $workdir/Turnip-24.2.4-MAGISK-KSU.zip * &> /dev/null
-if ! [ -a $workdir/Turnip-24.2.4-MAGISK-KSU.zip ]; then
+zip -r $workdir/Turnip-24.2.5-MAGISK-KSU.zip * &> /dev/null
+if ! [ -a $workdir/Turnip-24.2.5-MAGISK-KSU.zip ]; then
     echo -e "$red-Packing failed!$nocolor" && exit 1
 else
     clear
@@ -233,8 +233,8 @@ else
  cat <<EOF > "$META_FILE"
 {
   "schemaVersion": 1,
-  "name": "Freedreno Turnip Driver v24.2.4",
-  "description": "Compiled using Android NDK 27B",
+  "name": "Freedreno Turnip Driver v24.2.5",
+  "description": "Compiled using Android NDK 27c",
   "author": "v3kt0r-87",
   "packageVersion": "3",
   "vendor": "Mesa3D",
@@ -253,8 +253,8 @@ EOF
     clear
 
     echo -e "$green-All done, you can take your drivers from here;$nocolor" $'\n'
-    echo $workdir/Turnip-24.2.4-MAGISK-KSU.zip $'\n'
-    echo $workdir/Turnip-24.2.4-EMULATOR.zip $'\n'
+    echo $workdir/Turnip-24.2.5-MAGISK-KSU.zip $'\n'
+    echo $workdir/Turnip-24.2.5-EMULATOR.zip $'\n'
     echo -e "$green Build Finished :). $nocolor" $'\n'
 
 # Cleanup 
