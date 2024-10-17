@@ -1,5 +1,9 @@
 # Update Changelog
 
+**October 17 , 2024** : Updated Mesa version to 24.2.5
+
+1: Updated Android NDK to 27c
+
 **October 4, 2024** : Updated Mesa version to 24.2.4
 
 1: All previous Mesa Dev build drivers were removed , only Stable builds will be uploaded from now on  
