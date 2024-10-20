@@ -97,7 +97,7 @@ EOF
 
 # Generate build files using Meson
 echo "Generating build files..." $'\n'
-meson build-android-aarch64 --cross-file "$workdir"/"$mesadir"/android-aarch64 -Dbuildtype=release -Db_pie=true -Dplatforms=android -Dplatform-sdk-version=33 -Dandroid-stub=true -Dgallium-drivers= -Dvulkan-drivers=freedreno -Dfreedreno-kmds=kgsl -Db_lto=true &> "$workdir"/meson_log
+meson setup build-android-aarch64 --cross-file "$workdir"/"$mesadir"/android-aarch64 -Dbuildtype=release -Db_pie=true -Dplatforms=android -Dplatform-sdk-version=33 -Dandroid-stub=true -Dgallium-drivers= -Dvulkan-drivers=freedreno -Dfreedreno-kmds=kgsl -Db_lto=true -Dstrip=true &> "$workdir"/meson_log
 
 # Compile build files using Ninja
 echo "Compiling build files..." $'\n'
