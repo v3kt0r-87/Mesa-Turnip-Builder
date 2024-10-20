@@ -82,8 +82,8 @@ ndk_bin="$workdir/$ndkdir/toolchains/llvm/prebuilt/linux-x86_64/bin"
 cat <<EOF >"android-aarch64"
 [binaries]
 ar = '$ndk_bin/llvm-ar'
-c = ['ccache', '$ndk_bin/aarch64-linux-android33-clang', '-fno-semantic-interposition', '-O2']
-cpp = ['ccache', '$ndk_bin/aarch64-linux-android33-clang++', '-fno-semantic-interposition', '-fno-exceptions', '-fno-unwind-tables', '-fno-asynchronous-unwind-tables', '-static-libstdc++', '-O2']
+c = ['ccache', '$ndk_bin/aarch64-linux-android33-clang', '-fno-semantic-interposition', '-O2', '-flto']
+cpp = ['ccache', '$ndk_bin/aarch64-linux-android33-clang++', '-fno-semantic-interposition', '-fno-exceptions', '-fno-unwind-tables', '-fno-asynchronous-unwind-tables', '-static-libstdc++', '-O2', '-flto']
 c_ld = 'lld'
 cpp_ld = 'lld'
 strip = '$ndk_bin/aarch64-linux-android-strip'
