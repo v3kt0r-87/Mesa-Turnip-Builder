@@ -1,13 +1,11 @@
-**July 7 , 2025**: Updated Mesa to v25.1.5 Stable  
+**July 9 , 2025**: Updated Mesa to v25.2 DEV  
 
-**WARNING : Magisk 30 BETA and KernelSU might not load turnip driver , if so please PM me on telegram >> @VEKTOR_87**
+**WARNING : KernelSU might not load turnip driver , if so please PM me on telegram >> @VEKTOR_87**
 
-**Requires Android 14 to install**  
-
-**Android 13 users wont be able to install this build**
+**Android 13 users wont be able to install this build , Requires Android 14 to install**
 
 1. Updated Android NDK to 28.0B Stable 
-2. Built using Full LTO + O2
+2. Built using Thin LTO + O2
 3. Added uninstall script and minor improvements  
 4. Updated minimum Magisk version to v25.0  
 5. Now supports auto-updates via Magisk / KernelSU  
