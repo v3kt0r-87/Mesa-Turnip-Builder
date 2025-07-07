@@ -21,8 +21,8 @@ magiskdir="$workdir/turnip_module"      # Directory to create the Magisk module
 DRIVER_FILE="vulkan.turnip.so"          # Output Vulkan Driver (emulator)
 META_FILE="meta.json"                   # Metadata
 
-ZIP_FILE_MAGISK="Turnip-25.1.5-MAGISK-KSU-BETA.zip"
-ZIP_FILE_EMULATOR="Turnip-25.1.5-EMULATOR-BETA.zip" 
+ZIP_FILE_MAGISK="Turnip-MAGISK-KSU-BETA.zip"
+ZIP_FILE_EMULATOR="Turnip-EMULATOR-BETA.zip" 
 
 # List of required packages to build the Turnip driver
 deps="meson ninja patchelf unzip curl pip flex bison zip glslang"
@@ -236,7 +236,6 @@ version=v25.2
 versionCode=20250707
 author=V3KT0R-87
 description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-7xx GPUs.
-updateJson=https://raw.githubusercontent.com/v3kt0r-87/Mesa-Turnip-Builder/refs/heads/test/update.json
 EOF
 
 cat <<EOF >"customize.sh"
