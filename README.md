@@ -1,12 +1,12 @@
 # Freedreno Turnip Builder 🚀
 
-## Stable / RC Mesa  + Android NDK <br> Use this build for stability ✅ 
+## Staging Mesa + Android NDK <br> Use this build for testing ✅ 
 
 Simple Bash script that aims to build a turnip driver for **MAGISK/KERNELSU or EMULATOR**
 
 # What's New : 🔥
 
-**[Click Here](//github.com/v3kt0r-87/Mesa-Turnip-Builder/blob/main/UPDATES.md)**
+**[Click Here](//github.com/v3kt0r-87/Mesa-Turnip-Builder/blob/test/UPDATES.md)**
  
 ## How to Build Locally 🤔
 
