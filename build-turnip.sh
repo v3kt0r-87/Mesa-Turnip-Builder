@@ -8,7 +8,7 @@ nocolor='\033[0m'
 # Define Android NDK version and download URL
 ndkdir="android-ndk-r29-beta2"
 ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
-sdkver="34"
+sdkver="35"
 
 # Define Mesa version and download URL
 mesadir="mesa-main"
@@ -232,8 +232,8 @@ EOF
 cat <<EOF >"module.prop"
 id=turnip-mesa
 name=Freedreno Turnip Vulkan Driver BETA
-version=v25.2
-versionCode=20250707
+version=v25.3
+versionCode=20250722
 author=V3KT0R-87
 description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-7xx GPUs.
 EOF
@@ -255,7 +255,7 @@ ui_print ""
 ui_print "Checking Device info ..."
 sleep 1.25
 
-[ \$(getprop ro.system.build.version.sdk) -lt 34 ] && echo "Android 14 is now required! Aborting ..." && abort
+[ \$(getprop ro.system.build.version.sdk) -lt 35 ] && echo "Android 15 is now required! Aborting ..." && abort
 echo ""
 echo "Everything looks fine .... proceeding"
 ui_print ""
@@ -321,7 +321,7 @@ else
   "packageVersion": "3",
   "vendor": "Mesa3D",
   "driverVersion": "Vulkan 1.4",
-  "minApi": 34,
+  "minApi": 35,
   "libraryName": "vulkan.turnip.so"
 }
 EOF
