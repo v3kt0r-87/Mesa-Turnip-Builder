@@ -93,22 +93,23 @@ export OBJCOPY=llvm-objcopy
 export LDFLAGS="-fuse-ld=lld"
 
 # Create a temporary directory for fake cc/c++
-mkdir -p /tmp/fake-cc
+fakecc_dir="$workdir/fake-cc"
+mkdir -p "$fakecc_dir"
 
 # Create symbolic links to NDK-Clang
-ln -sf "$ndk_bin/clang" /tmp/fake-cc/cc
-ln -sf "$ndk_bin/clang++" /tmp/fake-cc/c++
+ln -sf "$ndk_bin/clang" "$fakecc_dir/cc"
+ln -sf "$ndk_bin/clang++" "$fakecc_dir/c++"
 
 # Prepend both fake-cc and NDK bin to PATH
-export PATH="/tmp/fake-cc:$ndk_bin:$PATH"
+export PATH="$fakecc_dir:$ndk_bin:$PATH"
 
 echo "Creating Meson cross file..." $'\n'
 
 cat <<EOF >"android-aarch64.txt"
 [binaries]
 ar = '$ndk_bin/llvm-ar'
-c = ['ccache', '$ndk_bin/aarch64-linux-android$sdkver-clang']
-cpp = ['ccache', '$ndk_bin/aarch64-linux-android$sdkver-clang++', '--start-no-unused-arguments', '-fno-exceptions', '-fno-unwind-tables', '-fno-asynchronous-unwind-tables', '-static-libstdc++', '--end-no-unused-arguments', '-Wno-error=c++11-narrowing']
+c = ['ccache', '$ndk_bin/aarch64-linux-android$sdkver-clang', '-Wno-deprecated-declarations', '-Wno-gnu-alignof-expression']
+cpp = ['ccache', '$ndk_bin/aarch64-linux-android$sdkver-clang++', '--start-no-unused-arguments', '-fno-exceptions', '-fno-unwind-tables', '-fno-asynchronous-unwind-tables', '-static-libstdc++', '--end-no-unused-arguments', '-Wno-error=c++11-narrowing', '-Wno-deprecated-declarations', '-Wno-gnu-alignof-expression']
 c_ld = '$ndk_bin/ld.lld'
 cpp_ld = '$ndk_bin/ld.lld'
 strip = '$ndk_bin/aarch64-linux-android-strip'
@@ -336,18 +337,13 @@ EOF
 
     echo -e "$green Build Finished :). $nocolor" $'\n'
     echo -e "$green-All done, you can take your drivers from here;$nocolor" $'\n'
-    echo "$workdir/$ZIP_FILE_MAGISK"
-    echo "$workdir/$ZIP_FILE_EMULATOR"
+    echo -e "Magisk-KSU Module : $workdir/$ZIP_FILE_MAGISK" $'\n' 
+    echo -e "Emulator : $workdir/$ZIP_FILE_EMULATOR" $'\n'
 
     # Cleanup 
     rm "$DRIVER_FILE" "$META_FILE"
 
     # Clean up fake-cc directory and symbolic links on exit
-    rm -rf /tmp/fake-cc/cc
-    rm -rf /tmp/fake-cc/c++
-    rm -rf /tmp/fake-cc
-
-
-
+    rm -rf "$fakecc_dir"
 
 fi
