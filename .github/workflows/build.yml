@@ -5,9 +5,8 @@ on:
     branches:
       - stable
       - main
-    paths:
-      - 'build-turnip.sh'
-      - '.github/workflows/build.yml'
+    tags:
+      - '*'
   pull_request:
     branches:
       - stable
@@ -52,6 +51,7 @@ jobs:
           bash build-turnip.sh
 
       - name: Upload Driver Artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Turnip-Driver-Artifacts
@@ -60,4 +60,12 @@ jobs:
             turnip_workdir/vulkan.turnip.so
             turnip_workdir/meson_log
             turnip_workdir/ninja_log
-          if-no-files-found: error
+          if-no-files-found: warn
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            turnip_workdir/Turnip-*.zip
+            turnip_workdir/vulkan.turnip.so

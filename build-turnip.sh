@@ -11,8 +11,8 @@ ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
 sdkver="34"
 
 # Define Mesa version and download URL
-mesadir="mesa-mesa-26.2.0"
-mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-26.2.0/mesa-mesa-26.2.0.zip?ref_type=tags"
+mesadir="mesa-mesa-26.2.3"
+mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-26.2.3/mesa-mesa-26.2.3.zip?ref_type=tags"
 
 # Define working directories
 workdir="$(pwd)/turnip_workdir"         # Base directory for all operations
@@ -21,8 +21,8 @@ magiskdir="$workdir/turnip_module"      # Directory to create the Magisk module
 DRIVER_FILE="vulkan.turnip.so"          # Output Vulkan Driver (emulator)
 META_FILE="meta.json"                   # Metadata
 
-ZIP_FILE_MAGISK="Turnip-26.2.0-MAGISK-KSU.zip"
-ZIP_FILE_EMULATOR="Turnip-26.2.0-EMULATOR.zip" 
+ZIP_FILE_MAGISK="Turnip-26.2.3-MAGISK-KSU.zip"
+ZIP_FILE_EMULATOR="Turnip-26.2.3-EMULATOR.zip" 
 
 # List of required packages to build the Turnip driver
 deps="meson ninja patchelf unzip curl flex bison zip clang ccache pkg-config"
@@ -174,30 +174,37 @@ if ! ninja -C build-android-aarch64 &> "$workdir"/ninja_log; then
     exit 1
 fi
 
-echo "Using patchelf to match .so name..." $'\n'
-cp "$workdir"/"$mesadir"/build-android-aarch64/src/freedreno/vulkan/libvulkan_freedreno.so "$workdir"
+echo "Stripping and patching driver binaries..." $'\n'
+driver_src="$workdir/$mesadir/build-android-aarch64/src/freedreno/vulkan/libvulkan_freedreno.so"
+if [ ! -f "$driver_src" ]; then
+    echo -e "$red Build failed! libvulkan_freedreno.so not found at $driver_src $nocolor" && exit 1
+fi
+
+cp "$driver_src" "$workdir/libvulkan_freedreno.so"
 cd "$workdir"
 
+# Strip unneeded debug symbols to reduce size from ~60MB+ to ~15-20MB
+"$ndk_bin/llvm-strip" --strip-unneeded libvulkan_freedreno.so
 
+# Prepare driver files for Magisk and Emulator
+cp libvulkan_freedreno.so vulkan.adreno.so
+cp libvulkan_freedreno.so "$DRIVER_FILE"
 
-if ! [ -f libvulkan_freedreno.so ]; then
-    echo -e "$red Build failed! libvulkan_freedreno.so not found $nocolor" && exit 1
-fi
+# Set DT_SONAME using patchelf to match driver filenames
+patchelf --set-soname vulkan.adreno.so vulkan.adreno.so
+patchelf --set-soname "$DRIVER_FILE" "$DRIVER_FILE"
 
 echo "Prepare magisk module structure..." $'\n'
 p1="system/vendor/lib64/hw"
 mkdir -p "$magiskdir/$p1"
+cp "$workdir/vulkan.adreno.so" "$magiskdir/$p1/"
 cd "$magiskdir"
-
-echo "Copy necessary files from the work directory..." $'\n'
-cp "$workdir"/libvulkan_freedreno.so "$workdir"/vulkan.adreno.so
-cp "$workdir"/vulkan.adreno.so "$magiskdir/$p1"
 
 meta="META-INF/com/google/android"
 mkdir -p "$meta"
 
 # Create update-binary
-cat <<EOF >"$meta/update-binary"
+cat <<'EOF' >"$meta/update-binary"
 #!/sbin/sh
 
 #################
@@ -207,7 +214,7 @@ cat <<EOF >"$meta/update-binary"
 umask 022
 
 # echo before loading util_functions
-ui_print() { echo "\$1"; }
+ui_print() { echo "$1"; }
 
 require_new_magisk() {
   ui_print "*******************************"
@@ -220,51 +227,56 @@ require_new_magisk() {
 # Load util_functions.sh
 #########################
 
-OUTFD=\$2
-ZIPFILE=\$3
+OUTFD=$2
+ZIPFILE=$3
 
 mount /data 2>/dev/null
 
-[ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
-. /data/adb/magisk/util_functions.sh
-[ \$MAGISK_VER_CODE -lt 25200 ] && require_new_magisk
+if [ -f /data/adb/magisk/util_functions.sh ]; then
+  . /data/adb/magisk/util_functions.sh
+elif [ -f /data/adb/ksu/util_functions.sh ]; then
+  . /data/adb/ksu/util_functions.sh
+elif [ -f /data/adb/ap/util_functions.sh ]; then
+  . /data/adb/ap/util_functions.sh
+else
+  require_new_magisk
+fi
+
+[ -n "$MAGISK_VER_CODE" ] && [ "$MAGISK_VER_CODE" -lt 25200 ] && require_new_magisk
 
 install_module
 exit 0
 EOF
 
 # Create updater-script
-cat <<EOF >"$meta/updater-script"
+cat <<'EOF' >"$meta/updater-script"
 #MAGISK
 EOF
 
-cat <<EOF >"uninstall.sh"
-find /data/user_de/*/*/*cache/* -iname "*shader*" -exec rm -rf {} +
-find /data/data/* -iname "*shader*" -exec rm -rf {} +
-find /data/data/* -iname "*graphitecache*" -exec rm -rf {} +
-find /data/data/* -iname "*gpucache*" -exec rm -rf {} +
-find /data_mirror/data*/*/*/*/* -iname "*shader*" -exec rm -rf {} +
-find /data_mirror/data*/*/*/*/* -iname "*graphitecache*" -exec rm -rf {} +
-find /data_mirror/data*/*/*/*/* -iname "*gpucache*" -exec rm -rf {} +
+cat <<'EOF' >"uninstall.sh"
+#!/system/bin/sh
+find /data/user/*/*/*cache /data/data/*/*cache /data/user_de/*/*/*cache -mindepth 1 -maxdepth 3 \
+    \( -iname "*shader*" -o -iname "*graphitecache*" -o -iname "*gpucache*" \) \
+    -exec rm -rf {} + 2>/dev/null || true
 EOF
 
 cat <<EOF >"module.prop"
 id=turnip-mesa
 name=Freedreno Turnip Vulkan Driver STABLE
-version=v26.2.0
-versionCode=20260814
+version=v26.2.3
+versionCode=20260919
 author=V3KT0R-87
-description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-7xx GPUs.
+description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-8xx GPUs.
 updateJson=https://raw.githubusercontent.com/v3kt0r-87/Mesa-Turnip-Builder/refs/heads/stable/update.json
 EOF
 
-cat <<EOF >"customize.sh"
-MODVER=\`grep_prop version \$MODPATH/module.prop\`
-MODVERCODE=\`grep_prop versionCode \$MODPATH/module.prop\`
+cat <<'EOF' >"customize.sh"
+MODVER=`grep_prop version $MODPATH/module.prop`
+MODVERCODE=`grep_prop versionCode $MODPATH/module.prop`
 
 ui_print ""
-ui_print "Version=\$MODVER "
-ui_print "MagiskVersion=\$MAGISK_VER"
+ui_print "Version=$MODVER "
+ui_print "MagiskVersion=$MAGISK_VER"
 ui_print ""
 ui_print "Freedreno Turnip Vulkan Driver -V3KT0R"
 ui_print "Adreno Driver Support Group - Telegram"
@@ -275,29 +287,27 @@ ui_print ""
 ui_print "Checking Device info ..."
 sleep 1.25
 
-[ \$(getprop ro.system.build.version.sdk) -lt 34 ] && echo "Android 14 is now required! Aborting ..." && abort
-echo ""
-echo "Everything looks fine .... proceeding"
+SDK_VER=$(getprop ro.build.version.sdk)
+[ -z "$SDK_VER" ] && SDK_VER=$(getprop ro.system.build.version.sdk)
+[ "${SDK_VER:-0}" -lt 34 ] && abort "Android 14 is now required! Aborting ..."
+ui_print ""
+ui_print "Everything looks fine .... proceeding"
 ui_print ""
 ui_print "Installing Driver Please Wait ..."
 ui_print ""
 
 sleep 1.25
-set_perm_recursive \$MODPATH/system 0 0 0755 0644
-set_perm \$MODPATH/system/vendor/lib64/hw/vulkan.adreno.so 0 0 0644
+set_perm_recursive $MODPATH/system 0 0 0755 0644
+set_perm $MODPATH/system/vendor/lib64/hw/vulkan.adreno.so 0 0 0644 u:object_r:same_process_hal_file:s0
 
 ui_print ""
 ui_print " Cleaning GPU Cache ... Please wait!"
-find /data/user_de/*/*/*cache/* -iname "*shader*" -exec rm -rf {} +
-find /data/data/* -iname "*shader*" -exec rm -rf {} +
-find /data/data/* -iname "*graphitecache*" -exec rm -rf {} +
-find /data/data/* -iname "*gpucache*" -exec rm -rf {} +
-find /data_mirror/data*/*/*/*/* -iname "*shader*" -exec rm -rf {} +
-find /data_mirror/data*/*/*/*/* -iname "*graphitecache*" -exec rm -rf {} +
-find /data_mirror/data*/*/*/*/* -iname "*gpucache*" -exec rm -rf {} +
+find /data/user/*/*/*cache /data/data/*/*cache /data/user_de/*/*/*cache -mindepth 1 -maxdepth 3 \
+    \( -iname "*shader*" -o -iname "*graphitecache*" -o -iname "*gpucache*" \) \
+    -exec rm -rf {} + 2>/dev/null || true
 
 ui_print ""
-ui_print "- Gpu Cache Cleared ..."
+ui_print "- GPU Cache Cleared ..."
 ui_print ""
 
 ui_print "Driver installed Successfully"
@@ -312,6 +322,10 @@ EOF
 
 echo "Packing driver files into Magisk/KSU module ..." $'\n'
 
+chmod 0755 "$meta/update-binary"
+chmod 0755 customize.sh
+chmod 0755 uninstall.sh
+
 zip -r "$workdir/$ZIP_FILE_MAGISK" * &> /dev/null
 
 if [[ ! -f "$workdir/$ZIP_FILE_MAGISK" ]]; then
@@ -324,15 +338,13 @@ else
 
     sleep 2
 
-    cd ..
-
-    mv vulkan.adreno.so vulkan.turnip.so
+    cd "$workdir"
 
 # Create meta.json file for turnip emulator
  cat <<EOF > "$META_FILE"
 {
   "schemaVersion": 1,
-  "name": "Freedreno Turnip Driver 26.2.0",
+  "name": "Freedreno Turnip Driver 26.2.3",
   "description": "Compiled using Android NDK 30",
   "author": "v3kt0r-87",
   "packageVersion": "3",

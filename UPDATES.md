@@ -1,3 +1,19 @@
+**Sep 19, 2026**: Updated Mesa to v26.2.3
+
+**Magisk, KernelSU, and APatch supported**
+
+**Requires Android 14 to install**
+
+1. Updated Mesa to v26.2.3
+2. Updated Android NDK to stable r30
+3. Fixed SELinux context for vulkan driver (`same_process_hal_file`)
+4. Optimized GPU Cache Cleaner to single-pass targeted traversal (fixes installer freezes)
+5. Added cache cleanup on module uninstallation
+6. Added DT_SONAME patching and symbol stripping (`llvm-strip`)
+7. Fixed module installer compatibility and syntax checks
+
+---
+
 **Aug 14, 2026**: Updated Mesa to v26.2.0
 
 Turnip drivers from now on will be delayed as I no longer have time / interest to maintain this.
