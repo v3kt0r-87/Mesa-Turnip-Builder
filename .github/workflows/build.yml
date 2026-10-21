@@ -46,10 +46,17 @@ jobs:
             python3-yaml
           pip3 install --upgrade --break-system-packages meson mako packaging pyyaml
 
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ runner.os }}-turnip-mesa
+          restore-keys: |
+            ${{ runner.os }}-turnip-
+
       - name: Extract Mesa Version
         id: get_version
         run: |
-          VERSION=$(grep '^mesadir=' build-turnip.sh | cut -d'"' -f2 | sed 's/mesa-mesa-//')
+          VERSION=$(grep -E '^(mesa_ver|mesadir)=' build-turnip.sh | head -n1 | cut -d'"' -f2 | sed 's/mesa-mesa-//')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Run Turnip Build Script
@@ -68,35 +75,18 @@ jobs:
             turnip_workdir/ninja_log
           if-no-files-found: warn
 
+      - name: Extract Release Notes
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          sed '/^---/q' UPDATES.md | sed '$d' > release_notes.md
+
       - name: Publish GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: MESA-Turnip-${{ steps.get_version.outputs.version }}
-          body: |
-            ## KernelSU and Magisk supported
-            ## Android 14 and above required to install
-
-            * ✅ **Turnip (Vulkan driver)** upgraded to **Mesa ${{ steps.get_version.outputs.version }}**, synced with latest upstream changes.
-            * ⚡ Continued **performance improvements** and **bug fixes** for various Vulkan games and applications.
-            * 🎮 Enhanced compatibility and support for newer **Qualcomm Adreno GPUs**.
-            * 🧩 Additional tuning for Android-specific driver quirks and rendering edge cases.
-            * 🚀 Optimized **GPU Cache Cleaner** into single-pass targeted traversal (prevents installer freezes).
-            * 🛡️ Fixed SELinux context for vendor HAL (`same_process_hal_file`).
-
-            ---
-
-            ## 🛠️ Build Info
-            * 🧼 All binaries **stripped using `llvm-strip`** to reduce size and remove debug info.
-            * ⚙️ Compiled using **Android NDK r30**.
-
-            ---
-
-            ## 🤝 Credits
-            * **Build & Maintenance:** [**v3kt0r-87 (Shankar Vallabhan)**](https://github.com/v3kt0r-87)
-            * **Telegram:** [@VEKTOR_87](https://t.me/VEKTOR_87)
-            * **Community Group:** [adreno_driver](https://t.me/adreno_driver_support_group)
+          body_path: release_notes.md
           files: |
             turnip_workdir/Turnip-*.zip
             turnip_workdir/vulkan.turnip.so
