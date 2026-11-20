@@ -1,11 +1,21 @@
 **Nov 20, 2026**: Updated Mesa to v26.3.1
 
-**Magisk, KernelSU, and APatch supported**
+## KernelSU, Magisk, and APatch supported
+## Android 14 and above required to install
 
-**Requires Android 14 to install**
+* ✅ **Turnip (Vulkan driver)** upgraded to **Mesa 26.3.1**, synced with latest upstream changes.
+* ⚡ Continued **performance improvements** and **bug fixes** for various Vulkan games and applications.
+* 🎮 Enhanced compatibility and support for newer **Qualcomm Adreno GPUs**.
+* 🧩 Additional tuning for Android-specific driver quirks and rendering edge cases.
 
-1. Updated Mesa to v26.3.1
-2. Built with Android NDK r30
+### 🛠️ Build Info
+* 🧼 All binaries **stripped using `llvm-strip`** to reduce size and remove debug info.
+* ⚙️ Compiled using **Android NDK r30**.
+
+### 🤝 Credits
+* **Build & Maintenance:** [**v3kt0r-87 (Shankar Vallabhan)**](https://github.com/v3kt0r-87)
+* **Telegram:** [@VEKTOR_87](https://t.me/VEKTOR_87)
+* **Community Group:** [adreno_driver](https://t.me/adreno_driver_support_group)
 
 ---
 
