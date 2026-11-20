@@ -1,3 +1,14 @@
+**Nov 20, 2026**: Updated Mesa to v26.3.1
+
+**Magisk, KernelSU, and APatch supported**
+
+**Requires Android 14 to install**
+
+1. Updated Mesa to v26.3.1
+2. Built with Android NDK r30
+
+---
+
 **Sep 19, 2026**: Updated Mesa to v26.2.3
 
 **Magisk, KernelSU, and APatch supported**

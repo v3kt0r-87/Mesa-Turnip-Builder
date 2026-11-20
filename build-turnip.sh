@@ -11,7 +11,7 @@ ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
 sdkver="34"
 
 # Define Mesa version and download URL
-mesa_ver="26.2.3"
+mesa_ver="26.3.1"
 mesadir="mesa-mesa-${mesa_ver}"
 mesaver="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-${mesa_ver}/mesa-mesa-${mesa_ver}.zip?ref_type=tags"
 
@@ -266,7 +266,7 @@ cat <<EOF >"module.prop"
 id=turnip-mesa
 name=Freedreno Turnip Vulkan Driver STABLE
 version=v${mesa_ver}
-versionCode=20260919
+versionCode=20261120
 author=V3KT0R-87
 description=Turnip is an open-source vulkan driver for devices with Adreno 6xx-8xx GPUs.
 updateJson=https://raw.githubusercontent.com/v3kt0r-87/Mesa-Turnip-Builder/refs/heads/stable/update.json
